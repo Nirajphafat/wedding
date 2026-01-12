@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wedding Invitation</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(to bottom, #fff5f7, #ffe4ec);
+        text-align: center;
+    }
+
+    .start-screen, .wedding-page {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .start-screen button {
+        padding: 20px 40px;
+        font-size: 22px;
+        background: #c2185b;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+
+    .start-screen button:hover {
+        background: #ad1457;
+    }
+
+    .wedding-page {
+        display: none;
+        padding: 20px;
+    }
+
+    h1 {
+        color: #b71c1c;
+        font-size: 42px;
+    }
+
+    .event {
+        background: white;
+        margin: 15px auto;
+        padding: 20px;
+        width: 90%;
+        max-width: 400px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .event h2 {
+        margin: 0;
+        color: #c2185b;
+    }
+
+    .event p {
+        margin: 5px 0;
+        font-size: 16px;
+    }
+
+    .footer {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .pdf-btn {
+        margin-top: 20px;
+        padding: 10px 25px;
+        font-size: 16px;
+        border: none;
+        border-radius: 25px;
+        background: #6a1b9a;
+        color: white;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- First Screen -->
+<div class="start-screen" id="start">
+    <h1>💍 Wedding Invitation 💍</h1>
+    <button onclick="openWedding()">Open Wedding</button>
+</div>
+
+<!-- Wedding Page -->
+<div class="wedding-page" id="wedding">
+    <h1>Venkatesh 💖 Neha</h1>
+
+    <div class="event">
+        <h2>🌼 Haldi</h2>
+        <p>📅 Date: 10 February 2026</p>
+        <p>⏰ Time: 10:00 AM</p>
+    </div>
+
+    <div class="event">
+        <h2>🎶 Sangeet</h2>
+        <p>📅 Date: 11 February 2026</p>
+        <p>⏰ Time: 7:00 PM</p>
+    </div>
+
+    <div class="event">
+        <h2>🔥 Wedding (Shadi)</h2>
+        <p>📅 Date: 12 February 2026</p>
+        <p>⏰ Time: 11:30 AM</p>
+    </div>
+
+    <button class="pdf-btn" onclick="window.print()">📄 Save as PDF</button>
+
+    <div class="footer">
+        With Love ❤️ | Wedding Celebration
+    </div>
+</div>
+
+<script>
+function openWedding() {
+    document.getElementById("start").style.display = "none";
+    document.getElementById("wedding").style.display = "flex";
+}
+</script>
+
+</body>
+</html>
