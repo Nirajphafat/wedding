@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Neha & Venkatesh Wedding</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI, sans-serif;
+  background:linear-gradient(#fff3e0,#ffe0b2);
+  text-align:center;
+}
+
+.container{
+  padding:20px;
+}
+
+h1{ color:#b71c1c; }
+h2{ color:#6a1b9a; margin-top:25px; }
+
+.card{
+  background:white;
+  margin:15px auto;
+  padding:15px;
+  border-radius:15px;
+  max-width:360px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.button{
+  display:inline-block;
+  margin-top:10px;
+  padding:12px 20px;
+  background:#d84315;
+  color:white;
+  text-decoration:none;
+  border-radius:25px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎶 Background Music -->
+<audio autoplay loop muted id="music">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8bb2a2b.mp3?filename=indian-wedding-music-11682.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.body.addEventListener("click",()=>{
+  document.getElementById("music").muted=false;
+});
+</script>
+
+<div class="container">
+
+<h1>💍 Wedding Ceremony 💍</h1>
+<h2>Neha & Venkatesh</h2>
+
+<div class="card">
+  <h3>💛 Haldi</h3>
+  <p>📅 10 Feb 2026</p>
+  <p>⏰ 10:00 AM</p>
+</div>
+
+<div class="card">
+  <h3>🎶 Sangeet</h3>
+  <p>📅 11 Feb 2026</p>
+  <p>⏰ 7:00 PM</p>
+</div>
+
+<div class="card">
+  <h3>🔥 Wedding</h3>
+  <p>📅 12 Feb 2026</p>
+  <p>⏰ 11:30 AM</p>
+</div>
+
+<div class="card">
+  <h3>📍 Venue</h3>
+  <a class="button" href="https://maps.app.goo.gl/k5KMrqTEcgWb7j679" target="_blank">
+    Open Google Maps
+  </a>
+</div>
+
+<div class="card">
+  <h3>🔳 QR Code</h3>
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://nirajphafat.github.io/wedding/" width="200">
+</div>
+
+<p style="margin:40px;color:#555;">With Love ❤️</p>
+
+</div>
+</body>
+</html>
