@@ -6,115 +6,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(#fff3e0, #ffe0b2);
-  text-align: center;
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(#fff3e0,#ffd180);
+  font-family:Segoe UI, sans-serif;
 }
 
-.container {
-  padding: 20px;
+.box{
+  text-align:center;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
 }
 
-h1 {
-  font-size: 32px;
-  color: #b71c1c;
+h1{
+  color:#b71c1c;
 }
 
-h2 {
-  color: #6a1b9a;
-  margin-top: 30px;
+a{
+  display:inline-block;
+  margin-top:20px;
+  padding:15px 30px;
+  background:#d84315;
+  color:white;
+  text-decoration:none;
+  font-size:18px;
+  border-radius:30px;
 }
-
-.card {
-  background: white;
-  margin: 15px auto;
-  padding: 15px;
-  border-radius: 15px;
-  max-width: 360px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.button {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 12px 20px;
-  background: #d84315;
-  color: white;
-  text-decoration: none;
-  border-radius: 25px;
-  font-size: 16px;
-}
-.button:hover {
-  background: #bf360c;
-}
-
-.qr img {
-  width: 200px;
-  margin-top: 10px;
+a:hover{
+  background:#bf360c;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎶 Background Music -->
-<audio autoplay loop muted id="music">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8bb2a2b.mp3?filename=indian-wedding-music-11682.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-  document.body.addEventListener("click", () => {
-    document.getElementById("music").muted = false;
-  });
-</script>
-
-<div class="container">
-
-<h1>💍 Wedding Invitation 💍</h1>
-<h2>Neha & Venkatesh</h2>
-
-<!-- 🟡 Haldi -->
-<div class="card">
-  <h3>💛 Haldi Ceremony</h3>
-  <p>📅 Date: 10 February 2026</p>
-  <p>⏰ Time: 10:00 AM</p>
-</div>
-
-<!-- 🟣 Sangeet -->
-<div class="card">
-  <h3>🎶 Sangeet Ceremony</h3>
-  <p>📅 Date: 11 February 2026</p>
-  <p>⏰ Time: 7:00 PM</p>
-</div>
-
-<!-- 🔴 Wedding -->
-<div class="card">
-  <h3>🔥 Wedding Ceremony</h3>
-  <p>📅 Date: 12 February 2026</p>
-  <p>⏰ Time: 11:30 AM</p>
-</div>
-
-<!-- 📍 Google Maps -->
-<div class="card">
-  <h3>📍 Venue Location</h3>
-  <a class="button" href="https://maps.app.goo.gl/k5KMrqTEcgWb7j679" target="_blank">
-    Open Google Maps
-  </a>
-</div>
-
-<!-- 🔳 QR Code -->
-<div class="card qr">
-  <h3>🔳 Scan QR Code</h3>
-  <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://nirajphafat.github.io/wedding/" alt="QR Code">
-  <p>Scan to open wedding website</p>
-</div>
-
-<p style="margin-top:40px;color:#555;">
-With Love ❤️ <br> Family & Friends
-</p>
-
+<div class="box">
+  <h1>💍 Wedding Invitation 💍</h1>
+  <p>Neha & Venkatesh</p>
+  <a href="wedding.html">Open Invitation</a>
 </div>
 
 </body>
