@@ -3,148 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation - Venkatesh & Neha</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
+    <title>Wedding Boarding Pass - Venkatesh & Neha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --navy: #1a2a44;
+            --navy: #0a192f;
             --gold: #c5a47e;
-            --cream: #faf9f6;
+            --sky-blue: #e0f2f7;
+            --white: #ffffff;
+            --boarding-red: #800000;
         }
 
         body {
-            margin: 0;
-            background-color: #121212;
+            margin: 0; background-color: #000;
             font-family: 'Montserrat', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; overflow: hidden;
         }
 
         .mobile-viewport {
-            width: 100vw;
-            max-width: 412px;
-            height: 100vh;
-            background: white;
-            position: relative;
-            overflow: hidden;
+            width: 100vw; max-width: 412px; height: 100vh;
+            background: var(--white); position: relative; overflow: hidden;
             box-shadow: 0 0 50px rgba(0,0,0,0.8);
         }
 
-        /* --- PAGE 1: PASSPORT COVER --- */
+        /* --- ✈️ AIRPLANE ANIMATION --- */
+        #airplane {
+            position: absolute; bottom: -100px; left: -100px;
+            font-size: 50px; z-index: 150; pointer-events: none;
+        }
+        @keyframes takeoff {
+            0% { bottom: -10%; left: -10%; transform: rotate(15deg) scale(1); }
+            100% { bottom: 110%; left: 110%; transform: rotate(15deg) scale(2); opacity: 0; }
+        }
+
+        /* --- PAGE 1: TERMINAL ENTRANCE --- */
         .page-passport {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: var(--navy);
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.8s ease;
+            position: absolute; width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--navy) 0%, #112240 100%);
+            z-index: 20; display: flex; flex-direction: column; align-items: center;
+            transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
         }
 
         .passport-window {
-             margin-top: 40px;
-            width: 200px;
-            height: 280px;
-            background: url('https://iili.io/fSZTxEP.jpg');
-            background-size: cover;
-            border-radius: 100px;
-            border: 8px solid #2a3a54;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            margin-top: 50px; width: 210px; height: 290px;
+            background: url('https://iili.io/fSZTxEP.jpg') center/cover;
+            border-radius: 105px; border: 4px solid var(--gold);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
-		
 
         .boarding-btn {
-            margin-top: -50px;
-            width: 130px;
-            height: 130px;
-            background: var(--gold);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: var(--navy);
-            font-weight: 800;
-            cursor: pointer;
-            border: 4px dashed var(--navy);
-            box-shadow: 0 0 0 8px rgba(197, 164, 126, 0.3);
-            text-align: center;
-            z-index: 25;
-            animation: pulse 2s infinite;
+            margin-top: -50px; width: 120px; height: 120px;
+            background: var(--gold); border-radius: 50%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: var(--navy); font-weight: 800; cursor: pointer;
+            border: 3px solid #fff; z-index: 25;
+            animation: pulse 2s infinite; text-align: center;
         }
 
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 164, 126, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(197, 164, 126, 0); }
+            70% { transform: scale(1.08); box-shadow: 0 0 0 15px rgba(197, 164, 126, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 164, 126, 0); }
         }
 
-        /* --- PAGE 2: ITINERARY REEL --- */
+        /* --- PAGE 2: IN-FLIGHT ITINERARY --- */
         .page-itinerary {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: var(--cream);
-            z-index: 10;
-            overflow-y: auto;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.8s ease;
+            position: absolute; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, #a5d8ff, #ffffff);
+            z-index: 10; overflow-y: auto; opacity: 0;
+            transform: translateY(100px); transition: 1.2s ease-out;
         }
+        .is-active .page-itinerary { opacity: 1; transform: translateY(0); }
+        .is-active .page-passport { transform: translateY(-100%); }
 
-        .is-active .page-passport { transform: scale(5); opacity: 0; pointer-events: none; }
-        .is-active .page-itinerary { transform: scale(1); opacity: 1; }
-
-        .slideshow-box {
-            width: 100%; height: 450px;
-            position: relative; background: #000;
-        }
-
+        /* --- IMAGE REEL --- */
+        .slideshow-box { width: 100%; height: 350px; position: relative; background: #000; }
         .slideshow-box img {
-            width: 100%; height: 100%;
-            object-fit: cover; position: absolute;
-            opacity: 0; transition: opacity 1.2s ease-in-out;
+            width: 100%; height: 100%; object-fit: cover;
+            position: absolute; opacity: 0; transition: opacity 1.5s ease;
         }
+        .slideshow-box img.active { opacity: 1; }
 
-        .slideshow-box img.active { opacity: 0.9; }
+        /* --- 🕊 PREMIUM NAME REVEAL --- */
+        .name-reveal {
+            font-family: 'Great Vibes', cursive; font-size: 3rem;
+            color: var(--navy); text-align: center; margin: 20px 0;
+            opacity: 0; transform: translateY(20px);
+            transition: 2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .is-active .name-reveal { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
 
+        /* --- COUNTDOWN --- */
         .countdown {
             display: flex; justify-content: space-around;
-            background: var(--navy); color: var(--gold);
-            padding: 20px 10px; margin: -40px 20px 25px;
-            border-radius: 15px; position: relative; z-index: 30;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.9); padding: 15px;
+            margin: -30px 25px 30px; border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); position: relative; z-index: 30;
         }
+        .time-item span { display: block; font-size: 1.2rem; font-weight: 700; color: var(--gold); }
+        .time-item label { font-size: 0.6rem; text-transform: uppercase; color: #666; }
 
-        .time-item span { display: block; font-size: 1.4rem; font-weight: 800; }
-        .time-item label { font-size: 0.6rem; text-transform: uppercase; }
-
-        .card {
-            background: white; margin: 0 20px 20px;
-            padding: 25px; border-radius: 20px;
-            text-align: center; border: 1px solid rgba(197, 164, 126, 0.2);
+        /* --- BOARDING PASS CARDS --- */
+        .boarding-pass {
+            margin: 0 20px 20px; background: white; border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05); overflow: hidden;
+            opacity: 0; transform: translateX(-30px); transition: 0.8s ease-out;
         }
+        .is-active .boarding-pass { opacity: 1; transform: translateX(0); }
 
-        .btn-maps {
-            display: inline-block; padding: 12px 25px;
-            background: var(--navy); color: white;
-            text-decoration: none; border-radius: 30px;
-            margin-top: 15px; font-weight: 600; font-size: 0.8rem;
+        .pass-header {
+            background: var(--navy); color: white; padding: 10px 20px;
+            font-size: 0.7rem; letter-spacing: 2px; display: flex; justify-content: space-between;
         }
+        .pass-body { padding: 20px; }
+        .event-title { font-family: 'Playfair Display'; font-size: 1.3rem; color: var(--navy); margin: 5px 0; }
+        
+        .flight-details {
+            display: flex; justify-content: space-between; 
+            margin-top: 15px; border-top: 1px dashed #ddd; padding-top: 15px;
+        }
+        .detail-item label { display: block; font-size: 0.55rem; color: #888; text-transform: uppercase; }
+        .detail-item span { font-weight: 700; font-size: 0.85rem; color: var(--navy); }
 
-        /* Music Floating Icon */
         #music-control {
             position: fixed; bottom: 20px; right: 20px;
-            background: var(--gold); color: var(--navy);
-            width: 45px; height: 45px; border-radius: 50%;
-            display: none; justify-content: center; align-items: center;
-            z-index: 100; cursor: pointer; font-size: 1.2rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            background: white; width: 45px; height: 45px; border-radius: 50%;
+            display: none; justify-content: center; align-items: center; z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer;
         }
     </style>
 </head>
@@ -154,25 +140,29 @@
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
+    <div id="airplane">✈️</div>
     <div id="music-control" onclick="toggleMusic()">🎵</div>
 
     <div class="mobile-viewport" id="mainApp">
         
         <div class="page-passport">
-            <h2 style="color: var(--gold); margin-top: 10px; letter-spacing: 5px;">PASSPORT</h2>
-			
+            <h2 style="color: var(--gold); margin-top: 25px; letter-spacing: 6px; font-weight: 300;">TERMINAL 1</h2>
             <div class="passport-window"></div>
-			
-            <div class="boarding-btn" onclick="takeOff()">TAP TO<br><span style="font-size: 1.4rem;">BOARD</span></div>
-            <div style="margin-top: auto; margin-bottom: 60px; color: var(--gold); text-align: center;">
-                <h1 style="font-family: 'Playfair Display'; font-style: italic; font-size: 1.8rem;">❤️ Venkatesh & Neha ❤️</h1>
-                <p style="letter-spacing: 3px; font-size: 0.8rem; opacity: 0.8;">12 February 2026</p>
+            <div class="boarding-btn" onclick="takeOff()">
+                <span style="font-size: 0.6rem; letter-spacing: 1px;">FINAL CALL</span>
+                <span style="font-size: 1.3rem;">BOARD</span>
+            </div>
+            <div style="margin-top: auto; margin-bottom: 50px; text-align: center; color: #fff;">
+                <p style="letter-spacing: 4px; font-size: 0.7rem; opacity: 0.7;">FLIGHT VN2026</p>
             </div>
         </div>
 
         <div class="page-itinerary">
             <div class="slideshow-box" id="reelSlides">
-                <img src="https://iili.io/fSZFgKx.jpg" class="active"> <img src="https://iili.io/fSZ7WhJ.jpg"> <img src="https://iili.io/fSZ7w1p.jpg"> </div>
+                <img src="https://iili.io/fSZFgKx.jpg" class="active"> 
+                <img src="https://iili.io/fSZ7WhJ.jpg"> 
+                <img src="https://iili.io/fSZ7w1p.jpg"> 
+            </div>
 
             <div class="countdown">
                 <div class="time-item"><span id="d">00</span><label>Days</label></div>
@@ -181,55 +171,93 @@
                 <div class="time-item"><span id="s">00</span><label>Sec</label></div>
             </div>
 
-            <div class="card">
-                <h2 style="font-family: 'Playfair Display'; color: var(--navy);">The Wedding</h2>
-                <p style="color: #666; font-size: 0.8rem;">THURSDAY, 12 FEB 2026</p>
-                <p><strong>Hotel Sai Gajanan</strong><br>Shegaon, Maharashtra</p>
-                <a href="https://maps.google.com" class="btn-maps">VIEW LOCATION 📍</a>
+            <p style="text-align: center; color: var(--navy); letter-spacing: 3px; font-size: 0.7rem; font-weight: 700;">NOW BOARDING</p>
+            <div class="name-reveal">Venkatesh & Neha</div>
+
+            <div class="boarding-pass" style="transition-delay: 0.8s;">
+                <div class="pass-header"><span>FLIGHT: VN-1102</span><span>ZONE: HALDI</span></div>
+                <div class="pass-body">
+                    <label style="font-size: 0.6rem; color: var(--gold); font-weight: 800;">DEPARTURE • 11 FEB</label>
+                    <h3 class="event-title">Haldi & Ring Ceremony</h3>
+                    <div class="flight-details">
+                        <div class="detail-item"><label>Gate</label><span>G-01</span></div>
+                        <div class="detail-item"><label>Time</label><span>10:00 AM</span></div>
+                        <div class="detail-item"><label>Seat</label><span>Reserved</span></div>
+                    </div>
+                </div>
             </div>
 
-            <div style="text-align: center; padding: 20px;">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=RSVP-Venkatesh-Neha" width="100" style="border: 4px solid white; border-radius: 10px;">
-                <h2 style="font-family: 'Great Vibes', cursive; color: var(--gold); font-size: 2.5rem; margin-top: 20px;">Happy Journey!</h2>
+            <div class="boarding-pass" style="transition-delay: 1.1s;">
+                <div class="pass-header" style="background: #34495e;"><span>FLIGHT: VN-1107</span><span>ZONE: SANGEET</span></div>
+                <div class="pass-body">
+                    <label style="font-size: 0.6rem; color: var(--gold); font-weight: 800;">IN-FLIGHT • 11 FEB</label>
+                    <h3 class="event-title">Sangeet Night</h3>
+                    <div class="flight-details">
+                        <div class="detail-item"><label>Gate</label><span>G-02</span></div>
+                        <div class="detail-item"><label>Time</label><span>07:30 PM</span></div>
+                        <div class="detail-item"><label>Class</label><span>First Class</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boarding-pass" style="transition-delay: 1.4s; border-bottom: 4px solid var(--boarding-red);">
+                <div class="pass-header" style="background: var(--boarding-red);"><span>FLIGHT: VN-1202</span><span>ZONE: WEDDING</span></div>
+                <div class="pass-body">
+                    <label style="font-size: 0.6rem; color: var(--gold); font-weight: 800;">ARRIVAL • 12 FEB</label>
+                    <h3 class="event-title">Main Wedding</h3>
+                    <div class="flight-details">
+                        <div class="detail-item"><label>Gate</label><span>Heavenly</span></div>
+                        <div class="detail-item"><label>Time</label><span>11:00 AM</span></div>
+                        <div class="detail-item"><label>Status</label><span>On Time</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; padding: 40px; background: white;">
+                <h2 style="font-family: 'Great Vibes'; font-size: 2.8rem; color: var(--gold); margin: 0;">Happy Journey!</h2>
+                <p style="font-size: 0.6rem; letter-spacing: 2px; color: #888; margin-top: 10px;">HOTEL SAI GAJANAN, SHEGAON</p>
             </div>
         </div>
     </div>
 
     <script>
         const song = document.getElementById('weddingSong');
-        const musicBtn = document.getElementById('music-control');
-
+        
         function takeOff() {
-            document.getElementById('mainApp').classList.add('is-active');
-            musicBtn.style.display = 'flex';
-            song.play(); // Starts music on boarding
-            startSlideshow();
+            // Plane Animation
+            const plane = document.getElementById('airplane');
+            plane.style.animation = 'takeoff 2.2s forwards ease-in';
+            
+            setTimeout(() => {
+                document.getElementById('mainApp').classList.add('is-active');
+                document.getElementById('music-control').style.display = 'flex';
+                song.play(); 
+                
+                // Start Slideshow
+                let idx = 0;
+                const slides = document.querySelectorAll('#reelSlides img');
+                setInterval(() => {
+                    slides[idx].classList.remove('active');
+                    idx = (idx + 1) % slides.length;
+                    slides[idx].classList.add('active');
+                }, 3500);
+            }, 800);
         }
 
         function toggleMusic() {
-            if (song.paused) song.play();
-            else song.pause();
+            song.paused ? song.play() : song.pause();
         }
 
-        function startSlideshow() {
-            let idx = 0;
-            const slides = document.querySelectorAll('#reelSlides img');
-            setInterval(() => {
-                slides[idx].classList.remove('active');
-                idx = (idx + 1) % slides.length;
-                slides[idx].classList.add('active');
-            }, 3500);
-        }
-
-        const weddingDate = new Date("Feb 12, 2026 18:00:00").getTime();
+        // Countdown Timer
+        const weddingDate = new Date("Feb 12, 2026 11:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const gap = weddingDate - now;
             const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
-            document.getElementById('d').innerText = Math.floor(gap / day);
-            document.getElementById('h').innerText = Math.floor((gap % day) / hour);
-            document.getElementById('m').innerText = Math.floor((gap % hour) / minute);
-            document.getElementById('s').innerText = Math.floor((gap % minute) / second);
+            document.getElementById('d').innerText = Math.floor(gap / day).toString().padStart(2, '0');
+            document.getElementById('h').innerText = Math.floor((gap % day) / hour).toString().padStart(2, '0');
+            document.getElementById('m').innerText = Math.floor((gap % hour) / minute).toString().padStart(2, '0');
+            document.getElementById('s').innerText = Math.floor((gap % minute) / second).toString().padStart(2, '0');
         }, 1000);
     </script>
 </body>
