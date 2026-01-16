@@ -1,56 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Wedding Invitation</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Boarding Pass</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1a2a44;
+            --gold: #c5a47e;
+            --cream: #faf9f6;
+            --sky: #e3f2fd;
+        }
 
-<style>
-body{
-  margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:linear-gradient(#fff3e0,#ffd180);
-  font-family:Segoe UI, sans-serif;
-}
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #d1d8e0;
+            font-family: 'Montserrat', sans-serif;
+            perspective: 1500px;
+            overflow: hidden;
+        }
 
-.box{
-  text-align:center;
-  background:white;
-  padding:30px;
-  border-radius:20px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.3);
-}
+        /* 3D Container */
+        .main-container {
+            width: 380px;
+            height: 650px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-h1{
-  color:#b71c1c;
-}
+        .main-container.is-opened {
+            transform: rotateY(180deg);
+        }
 
-a{
-  display:inline-block;
-  margin-top:20px;
-  padding:15px 30px;
-  background:#d84315;
-  color:white;
-  text-decoration:none;
-  font-size:18px;
-  border-radius:30px;
-}
-a:hover{
-  background:#bf360c;
-}
-</style>
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        /* FRONT: PASSPORT COVER */
+        .face-front {
+            background-color: var(--navy);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .passport-title {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-size: 0.9rem;
+            margin-top: 40px;
+            font-weight: 600;
+        }
+
+        .window-section {
+            width: 200px;
+            height: 280px;
+            margin-top: 40px;
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80');
+            background-size: cover;
+            border-radius: 100px;
+            border: 10px solid #2a3a54;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .boarding-seal {
+            margin-top: -40px;
+            width: 120px;
+            height: 120px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--navy);
+            font-weight: 800;
+            cursor: pointer;
+            z-index: 5;
+            border: 3px dashed var(--navy);
+            box-shadow: 0 0 0 6px rgba(197, 164, 126, 0.3);
+            transition: 0.3s;
+        }
+
+        .boarding-seal:hover { transform: scale(1.1); }
+
+        /* BACK: BOARDING PASS (The Wedding Details) */
+        .face-back {
+            background-color: var(--cream);
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; /* Allows scrolling like an Instagram reel */
+        }
+
+        /* Styling for the interior scrollable page */
+        .event-card {
+            background: white;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--navy);
+            animation: slideIn 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .ticket-header {
+            background: var(--navy);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+
+        .event-name { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--navy); }
+        .event-detail { font-size: 0.85rem; color: #666; margin: 5px 0; }
+        
+        .maps-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: var(--gold);
+            color: var(--navy);
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--navy);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="box">
-  <h1>💍 Wedding Invitation 💍</h1>
-  <p>Neha & Venkatesh</p>
-  <a href="wedding.html">Open Invitation</a>
-</div>
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    <button class="music-toggle" onclick="toggleMusic()">🎶</button>
+
+    <div class="main-container" id="inviteCard">
+        
+        <div class="card-face face-front">
+            <div class="passport-title">Passport to Love</div>
+            <div class="window-section"></div>
+            <div class="boarding-seal" onclick="flipCard()">
+                TAP TO<span>BOARD</span>
+            </div>
+            <div style="margin-top: 50px; color: var(--gold); text-align: center;">
+                <h2 style="font-family: 'Playfair Display'; margin: 0;">Maria & Carlos</h2>
+                <small style="letter-spacing: 2px;">FLIGHT WED2026</small>
+            </div>
+        </div>
+
+        <div class="card-face face-back">
+            <div class="ticket-header">BOARDING PASS</div>
+            
+            <div style="padding: 10px;">
+                <div class="event-card" style="animation-delay: 0.2s;">
+                    <div class="event-name">Yellow Vibes (Haldi)</div>
+                    <div class="event-detail">📅 10 Feb 2026 | 10:00 AM</div>
+                    <div class="event-detail">📍 Sunshine Gardens, Mumbai</div>
+                    <a href="https://goo.gl/maps/example1" class="maps-btn">VIEW LOCATION 📍</a>
+                </div>
+
+                <div class="event-card" style="animation-delay: 0.4s;">
+                    <div class="event-name">Starry Night (Sangeet)</div>
+                    <div class="event-detail">📅 11 Feb 2026 | 07:00 PM</div>
+                    <div class="event-detail">📍 Grand Ballroom, Palace Hotel</div>
+                    <a href="https://goo.gl/maps/example2" class="maps-btn">VIEW LOCATION 📍</a>
+                </div>
+
+                <div class="event-card" style="animation-delay: 0.6s;">
+                    <div class="event-name">The Big Flight (Shadi)</div>
+                    <div class="event-detail">📅 12 Feb 2026 | 06:00 PM</div>
+                    <div class="event-detail">📍 Royal Heritage Resort</div>
+                    <a href="https://goo.gl/maps/example3" class="maps-btn">VIEW LOCATION 📍</a>
+                </div>
+
+                <div style="text-align: center; padding: 20px; color: var(--navy);">
+                    <p style="font-family: 'Playfair Display'; font-style: italic;">See you at the gate!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+        
+        function flipCard() {
+            document.getElementById('inviteCard').classList.add('is-opened');
+            // Autoplay music on interaction
+            audio.play();
+        }
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+    </script>
 
 </body>
 </html>
